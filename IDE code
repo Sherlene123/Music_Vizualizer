@@ -1,0 +1,47 @@
+int soundPin = A0;
+int LED1 = 2;
+int LED2 = 3;
+int LED3 = 4;
+int LED4 = 5;
+int LED5 = 6;
+int LED6 = 7;
+int LED7 = 8;
+int LED8 = 9;
+
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(soundPin, INPUT);s
+    pinMode(LED1, OUTPUT);
+    pinMode(LED2, OUTPUT);
+    pinMode(LED3, OUTPUT);
+    pinMode(LED4, OUTPUT);
+    pinMode(LED5, OUTPUT);
+    pinMode(LED6, OUTPUT);
+    pinMode(LED7, OUTPUT);
+    pinMode(LED8, OUTPUT);
+}
+
+void loop()
+{
+    long sum = 0;
+    for(int i = 0; i < 100; i++) // taking 100 samples of sound
+    {
+        sum += analogRead(soundPin);
+    }
+
+    sum = sum / 100; // average the sample of sound
+
+    int threshold = 50; // Adjust sensitivity based on testing
+    digitalWrite(LED1, (sum >= 100 + threshold) ? HIGH : LOW);
+    digitalWrite(LED2, (sum >= 200 + threshold) ? HIGH : LOW);
+    digitalWrite(LED3, (sum >= 300 + threshold) ? HIGH : LOW);
+    digitalWrite(LED4, (sum >= 350 + threshold) ? HIGH : LOW);
+    digitalWrite(LED5, (sum >= 400 + threshold) ? HIGH : LOW);
+    digitalWrite(LED6, (sum >= 450 + threshold) ? HIGH : LOW);
+    digitalWrite(LED7, (sum >= 500 + threshold) ? HIGH : LOW);
+    digitalWrite(LED8, (sum >= 550 + threshold) ? HIGH : LOW);
+    
+    delay(10);
+    Serial.println(sum);
+}
